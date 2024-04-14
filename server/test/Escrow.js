@@ -1,8 +1,8 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-const token = (n) => {
-  return ethers.utils.parseUnits(n.toString(), "ether");
+const tokens = (n) => {
+  return ethers.parseUnits(n.toString(), "ether");
 };
 
 describe("Escrow", () => {
@@ -39,8 +39,11 @@ describe("Escrow", () => {
     await transaction.wait();
 
     //List property
-    transaction = await escrow.connect(seller).list(0);
+    transaction = await escrow
+      .connect(seller)
+      .list(0, buyer.address, tokens(10), tokens(5));
     await transaction.wait();
+    // console.log(transaction);
   });
 
   describe("Deployment", () => {
@@ -64,8 +67,24 @@ describe("Escrow", () => {
     });
   });
   describe("Listing", () => {
+    it("updates as listed", async () => {
+      const result = await escrow.isListed(0);
+      expect(result).to.be.equal(true);
+    });
     it("Updates ownership", async () => {
       expect(await realEstate.ownerOf(0)).to.be.equal(escrow.target);
+    });
+    it("Returns buyer", async () => {
+      const result = await escrow.buyer(0);
+      expect(result).to.be.equal(buyer.address);
+    });
+    it("Returns purchase price", async () => {
+      const result = await escrow.purchasePrice(0);
+      expect(result).to.be.equal(tokens(10));
+    });
+    it("Returns ecsrow amount", async () => {
+      const result = await escrow.escrowAmount(0);
+      expect(result).to.be.equal(tokens(5));
     });
   });
 });
