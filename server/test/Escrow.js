@@ -87,4 +87,24 @@ describe("Escrow", () => {
       expect(result).to.be.equal(tokens(5));
     });
   });
+  describe("Deposits", () => {
+    it("Updates contract balance", async () => {
+      const transaction = await escrow
+        .connect(buyer)
+        .depositEarnest(0, { value: tokens(5) });
+      await transaction.wait();
+      const result = await escrow.getBalance();
+      expect(result).to.be.equal(tokens(5));
+    });
+  });
+  describe("Inspection", () => {
+    it("Updates inspection status", async () => {
+      const transaction = await escrow
+        .connect(inspector)
+        .updateInspectionStatus(0, true);
+      await transaction.wait();
+      const result = await escrow.inspectionPassed(0);
+      expect(result).to.be.equal(true);
+    });
+  });
 });
