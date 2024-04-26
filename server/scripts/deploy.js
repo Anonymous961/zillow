@@ -13,7 +13,7 @@ async function main() {
   const realEstate = await RealEstate.deploy();
   await realEstate.waitForDeployment();
 
-  console.log(`Deployed Real Estate Contract at:${realEstate.target}`);
+  console.log(`Deployed RealEstate Contract at:${realEstate.target}`);
   console.log(`Minting 3 properties...\n`);
 
   for (let i = 0; i < 3; i++) {
@@ -37,6 +37,8 @@ async function main() {
   );
 
   await escrow.waitForDeployment();
+
+  console.log(`Deployed Escrow Contract at:${escrow.target}`);
 
   for (let i = 0; i < 3; i++) {
     let transaction = await realEstate
