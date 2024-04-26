@@ -1,0 +1,10 @@
+{
+    "31337": {
+        "realEstate": {
+            "address": "0x78a102bec36f17495de91715bbe92c92f0aae53b"
+        },
+        "escrow": {
+            "address": "0x6313e3661b085dbfeed5e7d5821a94ed9a42e949"
+        }
+    }
+}
