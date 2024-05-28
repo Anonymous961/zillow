@@ -6,9 +6,9 @@ module.exports = {
   solidity: "0.8.24",
   networks: {
     hardhat: {
-      accounts: {
-        mnemonic: process.env.SEED_PHRASE,
-      },
+      // accounts: {
+      //   mnemonic: process.env.SEED_PHRASE,
+      // },
       chainId: 1337,
     },
   },
