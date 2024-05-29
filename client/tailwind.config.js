@@ -2,7 +2,12 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        neighborhood: "url('/assets/neighborhood.jpeg')",
+        city: "url('/assets/city.jpg')",
+      },
+    },
   },
   plugins: [],
 };
