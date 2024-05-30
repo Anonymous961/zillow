@@ -20,11 +20,12 @@ async function main() {
     const transaction = await realEstate
       .connect(seller)
       .mint(
-        `https://ipfs.io/ipfs/QmQVcpsjrA6cr1iJjZAodYwmPekYgbnXGo4DFubJiLc2EB/${
-          i + 1
+        `https://ipfs.io/ipfs/QmQVcpsjrA6cr1iJjZAodYwmPekYgbnXGo4DFubJiLc2EB/${i + 1
         }.json`
       );
     await transaction.wait();
+    console.log(`https://ipfs.io/ipfs/QmQVcpsjrA6cr1iJjZAodYwmPekYgbnXGo4DFubJiLc2EB/${i + 1
+      }.json`)
   }
 
   //Deploy Escrow

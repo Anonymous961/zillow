@@ -1,18 +1,39 @@
-const Card = () => {
-    return (<div className="max-w-xs max-h-sm rounded overflow-hidden shadow-lg">
-        <img className="w-full" src="/assets/sunset.jpg" alt="Sunset in the mountains" />
+import PropTypes from 'prop-types'
+const Card = ({ home, toggleProp }) => {
+    return (<div className="max-w-xs max-h-sm rounded overflow-hidden shadow-lg hover:shadow-2xl" onClick={() => toggleProp(home)}>
+        <img className="w-full" src={home.image} alt="Sunset in the mountains" />
         <div className="px-6 py-4">
-            <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
+            <div className="font-bold text-xl mb-2">{home.name}</div>
             <p className="text-gray-700 text-base">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                {home.description}
             </p>
-        </div>
-        <div className="px-6 pt-4 pb-2">
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+            <div>
+
+                <h4>{home.attributes[0].value} ETH</h4>
+                <p>
+                    <strong>{home.attributes[2].value}</strong> bds |
+                    <strong>{home.attributes[3].value}</strong> ba |
+                    <strong>{home.attributes[4].value}</strong> sqft
+                </p>
+                <h4>{home.address}</h4>
+            </div>
         </div>
     </div>);
+}
+
+Card.propTypes = {
+    home: PropTypes.shape({
+        image: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        attributes: PropTypes.arrayOf(
+            PropTypes.shape({
+                value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+            })
+        ).isRequired,
+        address: PropTypes.string.isRequired,
+    }).isRequired,
+    toggleProp: () => { }
 }
 
 export default Card;
