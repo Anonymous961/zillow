@@ -27,6 +27,10 @@ async function main() {
     console.log(`https://ipfs.io/ipfs/QmQVcpsjrA6cr1iJjZAodYwmPekYgbnXGo4DFubJiLc2EB/${i + 1
       }.json`)
   }
+  console.log(seller.address)
+  console.log(inspector.address)
+  console.log(lender.address)
+
 
   //Deploy Escrow
   const Escrow = await ethers.getContractFactory("Escrow");

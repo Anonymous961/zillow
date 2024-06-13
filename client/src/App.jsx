@@ -24,16 +24,17 @@ function App() {
         const network = await provider.getNetwork();
         const realEstate = new ethers.Contract(config[network.chainId].realEstate.address, RealState, provider);
         const totalSupply = await realEstate.totalSupply()
+        // const properties = ethers.BigNumber.from(totalSupply).toString();
+        // console.log(realEstate)
         // console.log(totalSupply.toString());
         const homes = [];
-        for (var i = 0; i < totalSupply; i++) {
+        for (var i = 0; i < 1; i++) { // replacce by condition  i < totalSupply
           const uri = await realEstate.tokenURI(i);
           const response = await fetch(uri);
           const metadata = await response.json()
           homes.push(metadata)
         }
         setHomes(homes);
-        console.log(homes);
         const escrow = new ethers.Contract(config[network.chainId].escrow.address, Escrow, provider);
         setEscrow(escrow)
         // console.log(escrow)
@@ -53,6 +54,7 @@ function App() {
   };
   useEffect(() => {
     loadBlockchainData();
+
   }, []);
 
   const togglePop = (home) => {
@@ -74,7 +76,7 @@ function App() {
           ))}
         </div>
       </div>
-      {toggle && <Home home={home} provider={provider} escrow={escrow} togglePop={togglePop} setToggle={setToggle} />}
+      {toggle && <Home home={home} provider={provider} escrow={escrow} account={account} togglePop={togglePop} setToggle={setToggle} />}
     </>
   );
 }

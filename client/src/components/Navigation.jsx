@@ -5,7 +5,7 @@ const Navigation = ({ account, setAccount }) => {
       method: "eth_requestAccounts",
     });
     setAccount(accounts[0]);
-    console.log("acount is :", accounts[0]);
+    console.log("account is :", accounts[0]);
 
     // console.log(accounts);
     // const balance = await provider.getBalance(accounts[3]);
